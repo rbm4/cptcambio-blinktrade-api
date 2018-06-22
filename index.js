@@ -12,10 +12,12 @@ var blinktradeSocket = new BlinkTradeWS({ prod: true });
 
 function login(name,passwd,broker,res){
   blinktradeSocket.connect().then(function() {
-      return blinktradeSocket.login({ username: name, password: passwd, brokerId: broker });
+    return blinktradeSocket.login({ username: name, password: passwd, brokerId: broker }); 
     }).then(function(logged) {
       res.json(logged);
-    });
+    }).catch(e => {
+      res.json({'error': 'wrong keys'})
+    })
   }
 
 
