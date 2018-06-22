@@ -19,15 +19,14 @@ function login(name,passwd,broker,res){
   }
 
 
-function getDepositAddress(req, res) {
+function getDepositAddress(name, passwd, broker, res) {
     
     blinktradeSocket.connect().then(function() {
       return blinktradeSocket.login({ username: name, password: passwd, brokerId: broker });
     }).then(function(logged) {
-      res.json(logged);
-    //  blinktradeSocket.requestDeposit().then(function(deposit) {
-    //    console.log(deposit);
-    //  });
+      blinktradeSocket.requestDeposit().then(function(deposit) {
+        res.json(deposit);
+      });
     });
   }
 
@@ -39,8 +38,7 @@ express()
   .get('/login/:userKey/:passwd/:broker', function (req, res) {
         login(req.params.userKey,req.params.passwd,req.params.broker,res)
   })
-  .get('/new_wallet', function (req, res) { 
-    res.send('GET request to the new_wallet');
+  .get('/new_deposit/:userKey/:passwd/:broker', function (req, res) { 
+    getDepositAddress(req.params.userKey,req.params.passwd,req.params.broker,res)
   })
-  .get('/blinktrade/info', (req, res) => res.render('pages/blinktrade_info'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
