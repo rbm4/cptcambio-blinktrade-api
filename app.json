@@ -1,0 +1,8 @@
+{
+  "name": "Cptcambio Blinktrade integration",
+  "description": "A implementation for blinktrade websocket calls",
+  "repository": "https://github.com/rbm4/cptcambio-blinktrade-api",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku"],
+  "image": "heroku/nodejs"
+}
