@@ -35,10 +35,15 @@ express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/login/:userKey/:passwd/:broker', function (req, res) {
-        login(req.params.userKey,req.params.passwd,req.params.broker,res)
+  .get('/:method/:userKey/:passwd/:broker', function (req, res) {
+    if (req.params.method == "login"){
+      login(req.params.userKey,req.params.passwd,req.params.broker,res)
+    } else if ('new_deposit'){
+      getDepositAddress(req.params.userKey,req.params.passwd,req.params.broker,res)  
+    }
+        
   })
   .get('/new_deposit/:userKey/:passwd/:broker', function (req, res) { 
-    getDepositAddress(req.params.userKey,req.params.passwd,req.params.broker,res)
+    
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
