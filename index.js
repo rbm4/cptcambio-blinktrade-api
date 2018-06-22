@@ -18,7 +18,7 @@ function login(name,passwd,broker,res){
     }).then(function(logged) {
       res.json(logged);
     }).catch(e => {
-      res.json({'error': 'wrong key'})
+      res.json({'error': 'wrong key', 'exception': e})
     })
   }
 
