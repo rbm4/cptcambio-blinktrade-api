@@ -35,7 +35,7 @@ express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get(':method/:userKey/:passwd/:broker', function (req, res) {
+  .get('/:method/:userKey/:passwd/:broker', function (req, res) {
     if (req.params.method == "login"){
       login(req.params.userKey,req.params.passwd,req.params.broker,res)
     } else if ('new_deposit'){
