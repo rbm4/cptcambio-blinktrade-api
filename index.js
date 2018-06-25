@@ -14,7 +14,7 @@ function login(name,passwd,broker,res){
   blinktradeSocket.connect().then(function() {
     return blinktradeSocket.login({ username: name, password: passwd, brokerId: broker }).catch(e => {
         res.json({'error': 'wrong password', 'exception': e})
-      }); 
+      });
     }).then(function(logged) {
       res.json(logged);
     }).catch(e => {
@@ -26,11 +26,17 @@ function login(name,passwd,broker,res){
 function getDepositAddress(name, passwd, broker, res) {
     
     blinktradeSocket.connect().then(function() {
-      return blinktradeSocket.login({ username: name, password: passwd, brokerId: broker });
+      return blinktradeSocket.login({ username: name, password: passwd, brokerId: broker }).catch(e => {
+        res.json({'error': 'wrong password', 'exception': e});
+      });
     }).then(function(logged) {
       blinktradeSocket.requestDeposit().then(function(deposit) {
         res.json(deposit);
+      }).catch(e => {
+        res.json({'error': 'generate deposit error', 'exception': e});
       });
+    }).catch(e => {
+      res.json({'error': 'wrong key', 'exception': e});
     });
   }
 
