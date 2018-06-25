@@ -47,7 +47,4 @@ express()
     }
         
   })
-  .get('/new_deposit/:userKey/:passwd/:broker', function (req, res) { 
-    
-  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
